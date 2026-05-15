@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BainUltra 2026 Condensed Price List · English</title>
+<meta name="description" content="Interactive flipbook of the BainUltra 2026 Condensed Price List — searchable, browsable product reference for showroom staff.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%231e3c54'/%3E%3Ctext x='50' y='65' text-anchor='middle' font-family='Inter, sans-serif' font-size='52' fill='%23c8a87c' font-weight='600'%3EB%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bu-navy: #1e3c54;
+    --bu-warm: #f7f5f2;
+    --bu-accent: #c8a87c;
+    --page-w: 400;
+    --page-h: 514;
+    --page-ratio: 0.7778;
+    --anim-speed: 0.7s;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: linear-gradient(180deg, #e8e2da 0%, #cfc8be 50%, #c0b8ae 100%); color: #3a3a3a; overflow: hidden; height: 100vh; user-select: none; -webkit-user-select: none; }
+  .topbar { position: fixed; top: 0; left: 0; right: 0; height: 62px; background: var(--bu-navy); display: flex; align-items: center; justify-content: space-between; padding: 0 24px; z-index: 200; box-shadow: 0 2px 12px rgba(0,0,0,0.18); }
+  .topbar-brand { display: flex; align-items: center; gap: 14px; }
+  .topbar-logo { display: block; height: 26px; width: auto; }
+  .topbar-sep { width: 1px; height: 22px; background: rgba(255,255,255,0.22); }
+  .topbar-title { font-size: 12px; font-weight: 300; color: rgba(255,255,255,0.6); letter-spacing: 0.04em; }
+  .topbar-ctrls { display: flex; align-items: center; gap: 4px; }
+  .tb { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); color: #fff; min-width: 44px; height: 44px; border-radius: 7px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; transition: all 0.15s; font-size: 14px; padding: 2px 6px; gap: 1px; }
+  .tb .tb-label { font-size: 7px; font-weight: 400; letter-spacing: 0.03em; opacity: 0.7; text-transform: uppercase; line-height: 1; }
+  .tb:hover { background: rgba(255,255,255,0.16); }
+  .tb:active { transform: scale(0.93); }
+  .tb.off { opacity: 0.25; pointer-events: none; }
+  .tb-toc { background: rgba(200,168,124,0.2); border-color: rgba(200,168,124,0.3); }
+  .tb-toc:hover { background: rgba(200,168,124,0.35); }
+  .page-ind { color: rgba(255,255,255,0.85); font-size: 12px; font-weight: 400; min-width: 80px; text-align: center; }
+  .page-ind span { color: rgba(255,255,255,0.4); font-weight: 300; }
+  .gap { width: 6px; }
+  .scene { position: fixed; top: 62px; left: 0; right: 0; bottom: 44px; display: flex; align-items: center; justify-content: center; perspective: 2400px; }
+  .book-container { position: relative; width: calc(var(--page-w) * 2 * 1px); height: calc(var(--page-h) * 1px); transform-style: preserve-3d; }
+  .leaf { position: absolute; top: 0; right: 0; width: 50%; height: 100%; transform-origin: left center; transform-style: preserve-3d; transition: transform var(--anim-speed) cubic-bezier(0.645, 0.045, 0.355, 1.0); z-index: 1; }
+  .leaf.flipped { transform: rotateY(-180deg); }
+  .leaf-front, .leaf-back { position: absolute; top: 0; left: 0; width: 100%; height: 100%; backface-visibility: hidden; -webkit-backface-visibility: hidden; overflow: hidden; background: #fff; }
+  .leaf-front { z-index: 2; border-radius: 0 3px 3px 0; box-shadow: inset -4px 0 12px rgba(0,0,0,0.03); }
+  .leaf-back { transform: rotateY(180deg); z-index: 1; border-radius: 3px 0 0 3px; box-shadow: inset 4px 0 12px rgba(0,0,0,0.03); }
+  .leaf-front img, .leaf-back img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
+  .leaf-front::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to left, rgba(0,0,0,0.08) 0%, transparent 30%); pointer-events: none; opacity: 0; transition: opacity var(--anim-speed); }
+  .leaf.flipped .leaf-front::after { opacity: 1; }
+  .leaf-back::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(0,0,0,0.08) 0%, transparent 30%); pointer-events: none; opacity: 0; transition: opacity var(--anim-speed); }
+  .leaf.flipped .leaf-back::after { opacity: 0; }
+  .static-left { position: absolute; top: 0; left: 0; width: 50%; height: 100%; background: #fff; border-radius: 3px 0 0 3px; overflow: hidden; box-shadow: inset 4px 0 12px rgba(0,0,0,0.02); }
+  .static-left img { width: 100%; height: 100%; object-fit: contain; display: block; pointer-events: none; }
+  .spine-shadow { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 14px; height: 100%; background: linear-gradient(90deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.015) 30%, transparent 50%, rgba(0,0,0,0.015) 70%, rgba(0,0,0,0.05) 100%); pointer-events: none; z-index: 500; }
+  .book-container::before { content: ''; position: absolute; top: 8px; left: -6px; right: -6px; bottom: -8px; background: rgba(0,0,0,0.12); border-radius: 6px; filter: blur(12px); z-index: -1; }
+  .book-bg { position: absolute; inset: 0; background: #f9f9f9; border-radius: 4px; z-index: 0; }
+  .click-zone { position: absolute; top: 0; height: 100%; z-index: 600; cursor: pointer; }
+  .click-left { left: 0; width: 50%; cursor: w-resize; }
+  .click-right { right: 0; width: 50%; cursor: e-resize; }
+  .click-zone:hover { background: rgba(30,60,84,0.015); }
+  .nav-arrow { position: fixed; top: 50%; transform: translateY(-50%); width: 46px; height: 46px; background: rgba(255,255,255,0.9); border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,0.1); transition: all 0.15s; z-index: 100; color: var(--bu-navy); font-size: 18px; backdrop-filter: blur(6px); }
+  .nav-arrow:hover { background: #fff; box-shadow: 0 4px 18px rgba(0,0,0,0.14); transform: translateY(-50%) scale(1.06); }
+  .nav-arrow:active { transform: translateY(-50%) scale(0.94); }
+  .nav-arrow.off { opacity: 0.2; pointer-events: none; }
+  .nav-prev { left: 16px; }
+  .nav-next { right: 16px; }
+  .bottombar { position: fixed; bottom: 0; left: 0; right: 0; height: 44px; background: rgba(30,60,84,0.95); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; gap: 5px; padding: 0 12px; z-index: 200; overflow-x: auto; overflow-y: hidden; }
+  .bottombar::-webkit-scrollbar { height: 0; }
+  .bb { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); padding: 5px 11px; border-radius: 5px; font-size: 11px; font-weight: 400; cursor: pointer; transition: all 0.15s; font-family: inherit; white-space: nowrap; }
+  .bb:hover { background: rgba(255,255,255,0.16); color: #fff; }
+  .bb.active { background: var(--bu-accent); color: #fff; border-color: var(--bu-accent); }
+  .toc-panel { position: fixed; top: 62px; left: 0; width: 300px; bottom: 44px; background: rgba(255,255,255,0.82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 4px 0 20px rgba(0,0,0,0.1); z-index: 150; transform: translateX(-100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; }
+  .toc-panel.open { transform: translateX(0); }
+  .toc-hdr { padding: 16px 18px 10px; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--bu-navy); border-bottom: 1px solid rgba(0,0,0,0.08); position: sticky; top: 0; background: rgba(255,255,255,0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); z-index: 2; }
+  .toc-sec-title { padding: 10px 18px 4px; font-size: 9px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bu-accent); }
+  .toc-item { display: flex; align-items: center; justify-content: space-between; padding: 7px 18px; cursor: pointer; transition: background 0.12s; font-size: 12.5px; }
+  .toc-item:hover { background: rgba(247,245,242,0.7); }
+  .toc-pg { font-size: 10px; color: #aaa; }
+  .search-panel { position: fixed; top: 62px; right: 0; width: 340px; background: #fff; box-shadow: -4px 0 20px rgba(0,0,0,0.1); z-index: 150; transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); border-radius: 0 0 0 10px; max-height: 70vh; display: flex; flex-direction: column; overflow: hidden; }
+  .search-panel.open { transform: translateX(0); }
+  .search-wrap { padding: 14px; border-bottom: 1px solid #eee; }
+  .search-input { width: 100%; padding: 9px 12px; border: 1px solid #ddd; border-radius: 7px; font-size: 13px; font-family: inherit; outline: none; }
+  .search-input:focus { border-color: var(--bu-navy); }
+  .search-hint { font-size: 10px; color: #aaa; margin-top: 6px; letter-spacing: 0.02em; }
+  .search-results { overflow-y: auto; flex: 1; padding: 4px 0; }
+  .sr { padding: 8px 14px; cursor: pointer; transition: background 0.12s; font-size: 12px; border-bottom: 1px solid #f5f5f5; }
+  .sr:hover { background: var(--bu-warm); }
+  .sr-name { font-weight: 500; color: var(--bu-navy); }
+  .sr-pg { font-size: 10px; color: #aaa; margin-top: 1px; }
+  mark { background: rgba(200,168,124,0.35); color: inherit; padding: 0 1px; border-radius: 2px; }
+  .thumb-strip { position: fixed; bottom: 44px; left: 0; right: 0; height: 110px; background: rgba(30,60,84,0.95); backdrop-filter: blur(10px); display: none; z-index: 140; overflow-x: auto; overflow-y: hidden; white-space: nowrap; padding: 8px 16px; scroll-behavior: smooth; }
+  .thumb-strip.vis { display: flex; gap: 5px; align-items: center; }
+  .thumb-strip::-webkit-scrollbar { height: 3px; }
+  .thumb-strip::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 2px; }
+  .th { flex-shrink: 0; width: 62px; height: 80px; border-radius: 3px; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; opacity: 0.5; background: #fff; }
+  .th:hover { opacity: 0.85; border-color: rgba(255,255,255,0.3); }
+  .th.active { opacity: 1; border-color: var(--bu-accent); box-shadow: 0 0 10px rgba(200,168,124,0.4); }
+  .th img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .loading { position: fixed; inset: 0; background: var(--bu-navy); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.4s; }
+  .loading.gone { opacity: 0; pointer-events: none; }
+  .loading h1 { font-size: 22px; font-weight: 300; color: #fff; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 6px; }
+  .loading p { font-size: 12px; color: rgba(255,255,255,0.45); margin-bottom: 28px; }
+  .bar { width: 180px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--bu-accent); width: 0%; transition: width 0.25s; border-radius: 1px; }
+  .kbd-hint { position: fixed; bottom: 50px; right: 14px; font-size: 10px; color: rgba(255,255,255,0.3); z-index: 201; pointer-events: none; }
+  .kbd-hint kbd { padding: 1px 4px; border: 1px solid rgba(255,255,255,0.18); border-radius: 3px; font-family: inherit; font-size: 9px; }
+  @media (max-width: 900px) { .nav-arrow { width: 38px; height: 38px; font-size: 14px; } .nav-prev { left: 6px; } .nav-next { right: 6px; } }
+</style>
+</head>
+<body>
+
+<div class="loading" id="loader">
+  <h1>BainUltra</h1>
+  <p>2026 Condensed Price List · English</p>
+  <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+</div>
+
+<div class="topbar">
+  <div class="topbar-brand">
+    <img class="topbar-logo" src="bainultra-wordmark.svg" alt="BainUltra">
+    <div class="topbar-sep"></div>
+    <div class="topbar-title">2026 Condensed Price List · EN</div>
+    <button class="tb tb-toc" id="btnToc" title="Contents">&#9776;<span class="tb-label">Contents</span></button>
+  </div>
+  <div class="topbar-ctrls">
+    <button class="tb" id="btnSearch" title="Search">&#128269;<span class="tb-label">Search</span></button>
+    <button class="tb" id="btnThumbs" title="Thumbnails">&#9638;<span class="tb-label">Thumbs</span></button>
+    <div class="gap"></div>
+    <button class="tb" id="btnZoomOut" title="Zoom Out">&#8722;<span class="tb-label">Zoom &minus;</span></button>
+    <button class="tb" id="btnZoomIn" title="Zoom In">&#43;<span class="tb-label">Zoom +</span></button>
+    <div class="gap"></div>
+    <button class="tb off" id="btnPrev" title="Previous">&#9664;<span class="tb-label">Prev</span></button>
+    <div class="page-ind" id="pgInd">1 <span>/ 223</span></div>
+    <button class="tb" id="btnNext" title="Next">&#9654;<span class="tb-label">Next</span></button>
+    <div class="gap"></div>
+    <button class="tb" id="btnFS" title="Fullscreen">&#x26F6;<span class="tb-label">Full</span></button>
+    <a class="tb" id="btnDL" title="Download English PDF" href="./BU_Condensed_Price_List_2026.pdf" download style="text-decoration:none">&#8681;<span class="tb-label">PDF</span></a>
+    <div class="gap"></div>
+    <a class="tb" href="../" title="Switch language" style="text-decoration:none">&#127760;<span class="tb-label">EN / FR</span></a>
+  </div>
+</div>
+
+<button class="nav-arrow nav-prev off" id="navL">&#10094;</button>
+<button class="nav-arrow nav-next" id="navR">&#10095;</button>
+
+<div class="scene" id="scene">
+  <div class="book-container" id="bookCtr">
+    <div class="book-bg"></div>
+    <div class="static-left" id="staticLeft"></div>
+    <div class="spine-shadow"></div>
+    <div class="click-zone click-left" id="czL"></div>
+    <div class="click-zone click-right" id="czR"></div>
+  </div>
+</div>
+
+<div class="toc-panel" id="tocPanel"><div class="toc-hdr">Table of Contents</div><div id="tocBody"></div></div>
+
+<div class="search-panel" id="searchPanel">
+  <div class="search-wrap">
+    <input type="text" class="search-input" id="searchIn" placeholder="Search collections, models...">
+    <div class="search-hint">Try: amma, opalia, lunessa 7038, freestanding&hellip;</div>
+  </div>
+  <div class="search-results" id="searchRes"></div>
+</div>
+
+<div class="thumb-strip" id="thumbStrip"></div>
+
+<div class="bottombar" id="bottomBar">
+  <button class="bb" onclick="goTo(1)">Cover</button>
+  <button class="bb" onclick="goTo(2)">Index</button>
+  <button class="bb" onclick="goTo(4)">Info</button>
+  <button class="bb" onclick="goTo(7)">Accessories</button>
+  <button class="bb" onclick="goTo(13)">Amma</button>
+  <button class="bb" onclick="goTo(33)">Bain de ville</button>
+  <button class="bb" onclick="goTo(37)">Balneo</button>
+  <button class="bb" onclick="goTo(49)">BeOne</button>
+  <button class="bb" onclick="goTo(51)">Celestia</button>
+  <button class="bb" onclick="goTo(55)">Charism</button>
+  <button class="bb" onclick="goTo(63)">Citti</button>
+  <button class="bb" onclick="goTo(73)">Elegancia</button>
+  <button class="bb" onclick="goTo(81)">Essencia</button>
+  <button class="bb" onclick="goTo(89)">Esthesia</button>
+  <button class="bb" onclick="goTo(93)">Evanescence</button>
+  <button class="bb" onclick="goTo(101)">Inua</button>
+  <button class="bb" onclick="goTo(107)">Libra</button>
+  <button class="bb" onclick="goTo(117)">Lunessa</button>
+  <button class="bb" onclick="goTo(121)">Meridian</button>
+  <button class="bb" onclick="goTo(141)">Monarch</button>
+  <button class="bb" onclick="goTo(151)">Nokori</button>
+  <button class="bb" onclick="goTo(161)">Opalia</button>
+  <button class="bb" onclick="goTo(171)">Opus</button>
+  <button class="bb" onclick="goTo(173)">Origami</button>
+  <button class="bb" onclick="goTo(187)">Pro-Meridian</button>
+  <button class="bb" onclick="goTo(191)">Scala</button>
+  <button class="bb" onclick="goTo(195)">Thalassa</button>
+  <button class="bb" onclick="goTo(197)">Thalassa&sup2;</button>
+  <button class="bb" onclick="goTo(203)">Vibe</button>
+  <button class="bb" onclick="goTo(213)">Zenora</button>
+  <button class="bb" onclick="goTo(215)">Complementary</button>
+  <button class="bb" onclick="goTo(216)">Vedana</button>
+  <button class="bb" onclick="goTo(218)">Aka&#x0303;sa</button>
+</div>
+
+<div class="kbd-hint"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> flip pages &nbsp;&middot;&nbsp; <kbd>F</kbd> fullscreen &nbsp;&middot;&nbsp; <kbd>&#8984;F</kbd> search</div>
+
+<script>
+const N = 223;
+const DIR = 'pages/';
+const VER = 'v1';
+let spread = 0;
+let animating = false;
+const imgCache = {};
+
+function pf(n) { return DIR + 'page-' + String(n).padStart(3,'0') + '.jpg?' + VER; }
+
+function preload(n) {
+  if (n < 1 || n > N || imgCache[n]) return;
+  const img = new Image(); img.src = pf(n); imgCache[n] = img;
+}
+
+function preloadRange(c) { for (let i = -6; i <= 8; i++) preload(c + i); }
+
+function leftPageNum() { return spread * 2 + 1; }
+function rightPageNum() { return spread * 2 + 2; }
+function maxSpread() { return Math.ceil(N / 2) - 1; }
+
+function render() {
+  const ctr = document.getElementById('bookCtr');
+  ctr.querySelectorAll('.leaf').forEach(l => l.remove());
+  const lp = leftPageNum();
+  const rp = rightPageNum();
+  const sl = document.getElementById('staticLeft');
+  sl.innerHTML = '';
+  if (lp >= 1 && lp <= N) {
+    const img = new Image(); img.src = pf(lp); sl.appendChild(img);
+  }
+  const leaf = document.createElement('div');
+  leaf.className = 'leaf';
+  leaf.id = 'activeLeaf';
+  const front = document.createElement('div');
+  front.className = 'leaf-front';
+  if (rp >= 1 && rp <= N) {
+    const img = new Image(); img.src = pf(rp); front.appendChild(img);
+  }
+  const back = document.createElement('div');
+  back.className = 'leaf-back';
+  const nextLp = rp + 1;
+  if (nextLp >= 1 && nextLp <= N) {
+    const img = new Image(); img.src = pf(nextLp); back.appendChild(img);
+  }
+  leaf.appendChild(front);
+  leaf.appendChild(back);
+  ctr.insertBefore(leaf, ctr.querySelector('.spine-shadow'));
+  updateUI(lp, rp);
+  preloadRange(lp);
+}
+
+function updateUI(lp, rp) {
+  const clampR = Math.min(rp, N);
+  const ind = document.getElementById('pgInd');
+  if (rp > N) ind.innerHTML = lp + ' <span>/ ' + N + '</span>';
+  else ind.innerHTML = lp + '&ndash;' + clampR + ' <span>/ ' + N + '</span>';
+  const atStart = spread <= 0;
+  const atEnd = spread >= maxSpread();
+  document.getElementById('navL').classList.toggle('off', atStart);
+  document.getElementById('navR').classList.toggle('off', atEnd);
+  document.getElementById('btnPrev').classList.toggle('off', atStart);
+  document.getElementById('btnNext').classList.toggle('off', atEnd);
+  document.querySelectorAll('.th').forEach(t => {
+    const p = +t.dataset.p;
+    t.classList.toggle('active', p === lp || p === clampR);
+  });
+  const at = document.querySelector('.th.active');
+  if (at) at.scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+}
+
+function flipForward() {
+  if (animating || spread >= maxSpread()) return;
+  animating = true;
+  const ctr = document.getElementById('bookCtr');
+  const leaf = document.getElementById('activeLeaf');
+  const nextRp = rightPageNum() + 2;
+  const underRight = document.createElement('div');
+  underRight.className = 'leaf';
+  underRight.style.zIndex = '0';
+  underRight.style.transition = 'none';
+  const uf = document.createElement('div');
+  uf.className = 'leaf-front';
+  if (nextRp >= 1 && nextRp <= N) {
+    const img = new Image(); img.src = pf(nextRp); uf.appendChild(img);
+  }
+  underRight.appendChild(uf);
+  const ub = document.createElement('div');
+  ub.className = 'leaf-back';
+  underRight.appendChild(ub);
+  ctr.insertBefore(underRight, ctr.querySelector('.spine-shadow'));
+  leaf.style.zIndex = '10';
+  requestAnimationFrame(() => { leaf.classList.add('flipped'); });
+  setTimeout(() => { spread++; render(); animating = false; }, 750);
+}
+
+function flipBackward() {
+  if (animating || spread <= 0) return;
+  animating = true;
+  const ctr = document.getElementById('bookCtr');
+  const prevRp = leftPageNum() - 1;
+  const prevLp = leftPageNum() - 2;
+  const sl = document.getElementById('staticLeft');
+  sl.innerHTML = '';
+  if (prevLp >= 1 && prevLp <= N) {
+    const img = new Image(); img.src = pf(prevLp); sl.appendChild(img);
+  }
+  const leaf = document.createElement('div');
+  leaf.className = 'leaf flipped';
+  leaf.style.zIndex = '10';
+  const front = document.createElement('div');
+  front.className = 'leaf-front';
+  if (prevRp >= 1 && prevRp <= N) {
+    const img = new Image(); img.src = pf(prevRp); front.appendChild(img);
+  }
+  const back = document.createElement('div');
+  back.className = 'leaf-back';
+  const curLp = leftPageNum();
+  if (curLp >= 1 && curLp <= N) {
+    const img = new Image(); img.src = pf(curLp); back.appendChild(img);
+  }
+  leaf.appendChild(front);
+  leaf.appendChild(back);
+  const oldLeaf = document.getElementById('activeLeaf');
+  if (oldLeaf) oldLeaf.remove();
+  ctr.insertBefore(leaf, ctr.querySelector('.spine-shadow'));
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => { leaf.classList.remove('flipped'); });
+  });
+  setTimeout(() => { spread--; render(); animating = false; }, 750);
+}
+
+function goTo(pageNum) {
+  if (animating) return;
+  pageNum = Math.max(1, Math.min(pageNum, N));
+  const targetSpread = Math.floor((pageNum - 1) / 2);
+  if (targetSpread === spread) return;
+  const dist = Math.abs(targetSpread - spread);
+  if (dist <= 2) {
+    if (targetSpread > spread) flipForward();
+    else flipBackward();
+    if (dist === 2) {
+      setTimeout(() => {
+        if (targetSpread > spread) flipForward();
+        else if (targetSpread < spread) flipBackward();
+      }, 800);
+    }
+  } else {
+    animating = true;
+    const ctr = document.getElementById('bookCtr');
+    const dir = targetSpread > spread ? 1 : -1;
+    let flips = 0;
+    const maxFlips = Math.min(3, dist);
+    const speed = 180;
+    function quickFlip() {
+      if (flips >= maxFlips) {
+        spread = targetSpread; render(); animating = false; return;
+      }
+      spread += dir;
+      const lp = leftPageNum();
+      const rp = rightPageNum();
+      const sl = document.getElementById('staticLeft');
+      sl.innerHTML = '';
+      if (lp >= 1 && lp <= N) {
+        const img = new Image(); img.src = pf(lp); sl.appendChild(img);
+      }
+      const qLeaf = document.createElement('div');
+      qLeaf.className = 'leaf' + (dir < 0 ? ' flipped' : '');
+      qLeaf.style.zIndex = String(10 + maxFlips - flips);
+      qLeaf.style.transition = 'transform ' + speed + 'ms cubic-bezier(0.4, 0, 0.2, 1)';
+      const qf = document.createElement('div');
+      qf.className = 'leaf-front';
+      if (rp >= 1 && rp <= N) {
+        const img = new Image(); img.src = pf(rp); qf.appendChild(img);
+      }
+      const qb = document.createElement('div');
+      qb.className = 'leaf-back';
+      const nxt = dir > 0 ? rp + 1 : lp;
+      if (nxt >= 1 && nxt <= N) {
+        const img = new Image(); img.src = pf(nxt); qb.appendChild(img);
+      }
+      qLeaf.appendChild(qf);
+      qLeaf.appendChild(qb);
+      ctr.insertBefore(qLeaf, ctr.querySelector('.spine-shadow'));
+      requestAnimationFrame(() => {
+        if (dir > 0) qLeaf.classList.add('flipped');
+        else qLeaf.classList.remove('flipped');
+      });
+      flips++;
+      setTimeout(() => {
+        qLeaf.remove();
+        if (flips < maxFlips) quickFlip();
+        else { spread = targetSpread; render(); animating = false; }
+      }, speed + 50);
+    }
+    quickFlip();
+  }
+  document.getElementById('tocPanel').classList.remove('open');
+  document.getElementById('searchPanel').classList.remove('open');
+}
+
+document.getElementById('navL').onclick = flipBackward;
+document.getElementById('navR').onclick = flipForward;
+document.getElementById('btnPrev').onclick = flipBackward;
+document.getElementById('btnNext').onclick = flipForward;
+document.getElementById('czL').onclick = flipBackward;
+document.getElementById('czR').onclick = flipForward;
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT') return;
+  if (e.key === 'ArrowRight' || e.key === 'PageDown') { e.preventDefault(); flipForward(); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); flipBackward(); }
+  if (e.key === 'Home') { e.preventDefault(); goTo(1); }
+  if (e.key === 'End') { e.preventDefault(); goTo(N); }
+  if (e.key === 'f' && !e.ctrlKey && !e.metaKey) { e.preventDefault(); toggleFS(); }
+  if ((e.key === 'f' || e.key === 'F') && (e.ctrlKey || e.metaKey)) { e.preventDefault(); toggleSearch(); }
+  if (e.key === 'Escape') {
+    document.getElementById('tocPanel').classList.remove('open');
+    document.getElementById('searchPanel').classList.remove('open');
+    document.getElementById('thumbStrip').classList.remove('vis');
+  }
+});
+
+let tx = 0;
+document.getElementById('scene').addEventListener('touchstart', e => { tx = e.touches[0].clientX; });
+document.getElementById('scene').addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - tx;
+  if (Math.abs(dx) > 50) { dx < 0 ? flipForward() : flipBackward(); }
+});
+
+document.getElementById('scene').addEventListener('wheel', e => {
+  e.preventDefault();
+  if (e.deltaY > 0 || e.deltaX > 0) flipForward(); else flipBackward();
+}, { passive: false });
+
+function toggleFS() {
+  if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
+  else document.exitFullscreen();
+}
+document.getElementById('btnFS').onclick = toggleFS;
+document.getElementById('btnZoomIn').onclick = zoomIn;
+document.getElementById('btnZoomOut').onclick = zoomOut;
+
+const tocData = [
+  { s:'Overview', items:[
+    {n:'Cover',p:1},{n:'Index',p:2},{n:'General Information',p:4},
+    {n:'Therapeutic Care Unit',p:5},{n:'Therapies & Technologies',p:6},
+    {n:'Controls',p:7},{n:'Drain & Overflow',p:8},
+    {n:'Island Tub Drain',p:9},{n:'Grab Bars & Armrests',p:10},
+    {n:'Color & Finish',p:11}
+  ]},
+  { s:'Bath Collections', items:[
+    {n:'Amma®',p:13},{n:'Bain de ville™',p:33},{n:'Balneo®',p:37},
+    {n:'BeOne™',p:49},{n:'Celestia™',p:51},{n:'Charism®',p:55},
+    {n:'Citti®',p:63},{n:'Elegancia®',p:73},{n:'Essencia®',p:81},
+    {n:'Esthesia®',p:89},{n:'Evanescence®',p:93},{n:'Inua®',p:101},
+    {n:'Libra',p:107},{n:'Lunessa™',p:117},{n:'Meridian®',p:121},
+    {n:'Monarch',p:141},{n:'Nokori®',p:151},{n:'Opalia®',p:161},
+    {n:'Opus',p:171},{n:'Origami®',p:173},{n:'Pro-Meridian®',p:187},
+    {n:'Scala™',p:191},{n:'Thalassa™',p:195},{n:'Thalassa²',p:197},
+    {n:'Vibe®',p:203},{n:'Zenora™',p:213}
+  ]},
+  { s:'Complementary', items:[
+    {n:'Complementary Products',p:215},
+    {n:'Vedana® Care Unit',p:216},
+    {n:'Akãsa® Products',p:218},
+    {n:'Skirts',p:220},
+    {n:'Accessories',p:222}
+  ]}
+];
+
+function buildTOC() {
+  const body = document.getElementById('tocBody');
+  tocData.forEach(sec => {
+    const st = document.createElement('div'); st.className = 'toc-sec-title'; st.textContent = sec.s;
+    body.appendChild(st);
+    sec.items.forEach(it => {
+      const d = document.createElement('div'); d.className = 'toc-item';
+      d.innerHTML = '<span>' + it.n + '</span><span class="toc-pg">p.' + it.p + '</span>';
+      d.onclick = () => goTo(it.p);
+      body.appendChild(d);
+    });
+  });
+}
+
+document.getElementById('btnToc').onclick = () => {
+  document.getElementById('tocPanel').classList.toggle('open');
+  document.getElementById('searchPanel').classList.remove('open');
+};
+
+const modelPages = [
+  ['Amma 6030',13],['Amma 6032',15],['Amma 6036',17],['Amma 6636',19],
+  ['Amma 7236',21],['Amma 7242',23],['Amma Oval 6638',25],['Amma Oval 7242',27],
+  ['Amma Oval 7242 Freestanding',29],['Amma Oval 7242 Narrow Base',31],
+  ['Bain de ville 6030',33],['Bain de ville 6632',35],
+  ['Balneo Cella 6636',37],['Balneo Cella 7240',39],
+  ['Balneo Naos 6636',41],['Balneo Naos 7240',43],
+  ['Balneo Sanos 6636',45],['Balneo Sanos 7240',47],
+  ['BeOne 4639',49],
+  ['Celestia 6233',51],['Celestia 6635',53],
+  ['Charism 5736',55],['Charism 6434',57],['Charism 7240',59],['Charism Oval 6436',61],
+  ['Citti 17',63],['Citti 6032 Trio With Insert',65],['Citti 6032 With Insert',67],
+  ['Citti 6032 Without Insert',69],['Citti 6032 Trio Without Insert',71],
+  ['Elegancia 6636',73],['Elegancia 6642',75],['Elegancia 7236',77],['Elegancia 7242',79],
+  ['Essencia 6838',81],['Essencia Design 7236',83],
+  ['Essencia Oval 7236',85],['Essencia Oval 7236 Freestanding',87],
+  ['Esthesia 6436',89],['Esthesia 6638',91],
+  ['Evanescence 5936',93],['Evanescence 6634',95],
+  ['Evanescence Oval 6636',97],['Evanescence Oval 7440',99],
+  ['Inua 6036',101],['Inua 6636',103],['Inua 7240',105],
+  ['Libra 6632',107],['Libra 6834',109],['Libra 7436',111],
+  ['Libra Aurora 6634',113],['Libra Oval 6635',115],
+  ['Lunessa 6636',117],['Lunessa 7038',119],
+  ['Meridian 50',121],['Meridian 55',123],['Meridian 60',125],
+  ['Meridian 6030',127],['Meridian 6032',129],['Meridian 6042',131],
+  ['Meridian Duo',133],['Meridian Ellipse 6636',135],['Meridian Ellipse 7240',137],['Meridian Uno',139],
+  ['Monarch 6032',141],['Monarch 6036',143],['Monarch 6636',145],
+  ['Monarch 7236',147],['Monarch 7240',149],
+  ['Nokori 6331',151],['Nokori 6429',153],['Nokori 6935',155],
+  ['Nokori 7131',157],['Nokori Oval 6737',159],
+  ['Opalia 6839 Centered Ellipse',161],
+  ['Opalia 6839 Oblique Ellipse Left',163],
+  ['Opalia 6839 Oblique Ellipse Right',165],
+  ['Opalia 6839 Off-Centered Ellipse Left',167],
+  ['Opalia 6839 Off-Centered Ellipse Right',169],
+  ['Opus 6434',171],
+  ['Origami 6030',173],['Origami 6032',175],['Origami 6632',177],
+  ['Origami 6636',179],['Origami 7236',181],['Origami 7242',183],['Origami Oval 7040',185],
+  ['Pro-Meridian 55',187],['Pro-Meridian 60',189],
+  ['Scala 6638',191],['Scala 7242',193],
+  ['Thalassa Sensation',195],
+  ['Thalassa² 6031',197],['Thalassa² 6633',199],['Thalassa² 7233',201],
+  ['Vibe 5828',203],['Vibe 6030',205],['Vibe Oval 5830',207],
+  ['Vibe Back to Wall 5828',209],['Vibe Design 6033',211],
+  ['Zenora 6030',213],
+  ['Vedana® Care Unit',216],
+  ['Akãsa® Bath Pillow',218],
+  ['Akãsa® Cushion',218],
+  ['Skirts',220],
+  ['Accessories',222]
+];
+
+const sIdx = [];
+modelPages.forEach(([n, p]) => {
+  let coll = '';
+  if (n.startsWith('Bain')) coll = 'Bain de ville';
+  else if (n.startsWith('Balneo')) coll = 'Balneo';
+  else if (n.startsWith('Pro-Meridian')) coll = 'Pro-Meridian';
+  else if (n.startsWith('Thalassa²')) coll = 'Thalassa²';
+  else if (n.startsWith('Thalassa')) coll = 'Thalassa';
+  else if (n.startsWith('Vedana') || n.startsWith('Akã') || n.startsWith('Skirts') || n.startsWith('Accessories')) coll = 'Complementary';
+  else coll = n.split(' ')[0].replace(/[®™²]/g,'');
+  sIdx.push({ t: n + ' ' + coll, n: n, sec: coll, p: p });
+});
+tocData.forEach(sec => sec.items.forEach(it => {
+  sIdx.push({ t: it.n + ' ' + sec.s, n: it.n, sec: sec.s, p: it.p });
+}));
+
+function toggleSearch() {
+  document.getElementById('searchPanel').classList.toggle('open');
+  document.getElementById('tocPanel').classList.remove('open');
+  if (document.getElementById('searchPanel').classList.contains('open'))
+    setTimeout(() => document.getElementById('searchIn').focus(), 80);
+}
+document.getElementById('btnSearch').onclick = toggleSearch;
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"]/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+}
+function highlight(text, q) {
+  if (!q) return escapeHtml(text);
+  const escaped = escapeHtml(text);
+  const re = new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'gi');
+  return escaped.replace(re, '<mark>$1</mark>');
+}
+
+document.getElementById('searchIn').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase().trim();
+  const res = document.getElementById('searchRes');
+  res.innerHTML = '';
+  if (q.length < 1) return;
+  const hits = sIdx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 30);
+  if (!hits.length) {
+    res.innerHTML = '<div style="padding:14px;color:#aaa;font-size:12px">No results</div>';
+    return;
+  }
+  hits.forEach(h => {
+    const d = document.createElement('div'); d.className = 'sr';
+    d.innerHTML = '<div class="sr-name">' + highlight(h.n, q) + '</div><div class="sr-pg">' + h.sec + ' • p.' + h.p + '</div>';
+    d.onclick = () => goTo(h.p);
+    res.appendChild(d);
+  });
+});
+
+document.getElementById('btnThumbs').onclick = () => document.getElementById('thumbStrip').classList.toggle('vis');
+
+function buildThumbs() {
+  const strip = document.getElementById('thumbStrip');
+  for (let i = 1; i <= N; i++) {
+    const d = document.createElement('div'); d.className = 'th'; d.dataset.p = i;
+    const img = document.createElement('img'); img.loading = 'lazy'; img.src = pf(i);
+    d.appendChild(img);
+    d.onclick = () => goTo(i);
+    strip.appendChild(d);
+  }
+}
+
+const PAGE_RATIO = 0.7778;
+let zoomLevel = 1.0;
+
+function resizeBook() {
+  const topBar = 62, bottomBar = 44, pad = 32, arrowZone = 120;
+  const availH = window.innerHeight - topBar - bottomBar - pad;
+  const availW = window.innerWidth - arrowZone;
+  let pageH = availH;
+  let pageW = pageH * PAGE_RATIO;
+  let bookW = pageW * 2;
+  if (bookW > availW) {
+    bookW = availW;
+    pageW = bookW / 2;
+    pageH = pageW / PAGE_RATIO;
+  }
+  pageW = Math.floor(pageW * zoomLevel);
+  pageH = Math.floor(pageH * zoomLevel);
+  document.documentElement.style.setProperty('--page-w', pageW);
+  document.documentElement.style.setProperty('--page-h', pageH);
+}
+
+function zoomIn() {
+  if (zoomLevel >= 1.5) return;
+  zoomLevel = Math.min(1.5, zoomLevel + 0.1);
+  resizeBook();
+}
+function zoomOut() {
+  if (zoomLevel <= 0.5) return;
+  zoomLevel = Math.max(0.5, zoomLevel - 0.1);
+  resizeBook();
+}
+
+function init() {
+  resizeBook();
+  window.addEventListener('resize', resizeBook);
+  buildTOC();
+  buildThumbs();
+  for (let i = 1; i <= 8; i++) preload(i);
+  const fill = document.getElementById('barFill');
+  let p = 0;
+  const iv = setInterval(() => {
+    p += Math.random() * 30;
+    if (p >= 100) {
+      p = 100; fill.style.width = '100%'; clearInterval(iv);
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('gone');
+        setTimeout(() => document.getElementById('tocPanel').classList.add('open'), 400);
+      }, 250);
+    }
+    else fill.style.width = p + '%';
+  }, 120);
+  spread = 0;
+  render();
+}
+
+document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', init) : init();
+</script>
+</body>
+</html>
