@@ -1,12 +1,12 @@
 # 2026 Condensed Price List
 
 Interactive bilingual (EN/FR) flipbook of the BainUltra 2026 Condensed Price List.
-Hosted on GitHub Pages — shareable to dealers, partners, and showroom staff via a
-single link that lands them on a language-picker, then opens the corresponding
+Designed for static hosting via GitHub Pages or any approved internal web host.
+The first screen lands on a language-picker, then opens the corresponding
 flipbook with search, table of contents, thumbnails, page-flip animations,
 fullscreen, and downloadable PDF.
 
-**Live URL:** https://bainultra.github.io/catalogue/
+**Planned Pages URL:** https://bainultra.github.io/catalogue/
 
 **Repository:** https://github.com/BainUltra/catalogue
 
@@ -43,14 +43,16 @@ returns to the picker.
 
 ## How to share
 
-Paste this single URL anywhere — Slack, email, SharePoint, dealer portal:
+After GitHub Pages is enabled or the static files are deployed to an approved
+host, paste the hosted URL anywhere — Slack, email, SharePoint, dealer portal:
 
 ```
 https://bainultra.github.io/catalogue/
 ```
 
-Recipients land on the language picker and click through. The URL bar shows
-`bainultra.github.io/catalogue/`, so it stays self-contained under BainUltra.
+Recipients land on the language picker and click through. If GitHub Pages is
+used, the URL bar shows `bainultra.github.io/catalogue/`, so it stays
+self-contained under BainUltra.
 
 ### SharePoint embed
 
