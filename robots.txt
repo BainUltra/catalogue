@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /en/pages/
+Disallow: /fr/pages/
+Disallow: /en/BU_Condensed_Price_List_2026.pdf
+Disallow: /fr/Liste_de_prix_condensee_2026_FR.pdf
+
+# HTML pages carry noindex metadata so social preview crawlers can still fetch
+# titles/descriptions/images. PDF and page-image assets are explicitly blocked
+# from crawler access here; _headers contains equivalent noindex headers for
+# any future host that supports static response headers.
