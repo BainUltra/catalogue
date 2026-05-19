@@ -29,6 +29,7 @@
   .tb .tb-label { font-size: 7px; font-weight: 400; letter-spacing: 0.03em; opacity: 0.7; text-transform: uppercase; line-height: 1; }
   .tb:hover { background: rgba(255,255,255,0.16); }
   .tb:active { transform: scale(0.93); }
+  .tb-link { text-decoration: none; }
   .tb.off { opacity: 0.25; pointer-events: none; }
   .tb-toc { background: rgba(200,168,124,0.2); border-color: rgba(200,168,124,0.3); }
   .tb-toc:hover { background: rgba(200,168,124,0.35); }
@@ -85,6 +86,7 @@
   .sr:hover { background: var(--bu-warm); }
   .sr-name { font-weight: 500; color: var(--bu-navy); }
   .sr-pg { font-size: 10px; color: #aaa; margin-top: 1px; }
+  .empty-results { padding: 14px; color: #aaa; font-size: 12px; }
   mark { background: rgba(200,168,124,0.35); color: inherit; padding: 0 1px; border-radius: 2px; }
   .thumb-strip { position: fixed; bottom: 44px; left: 0; right: 0; height: 110px; background: rgba(30,60,84,0.95); backdrop-filter: blur(10px); display: none; z-index: 140; overflow-x: auto; overflow-y: hidden; white-space: nowrap; padding: 8px 16px; scroll-behavior: smooth; }
   .thumb-strip.vis { display: flex; gap: 5px; align-items: center; }
@@ -101,8 +103,20 @@
   .bar { width: 180px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; overflow: hidden; }
   .bar-fill { height: 100%; background: var(--bu-accent); width: 0%; transition: width 0.25s; border-radius: 1px; }
   .kbd-hint { position: fixed; bottom: 50px; right: 14px; font-size: 10px; color: rgba(255,255,255,0.3); z-index: 201; pointer-events: none; }
+  .kbd-hint.hidden { display: none; }
   .kbd-hint kbd { padding: 1px 4px; border: 1px solid rgba(255,255,255,0.18); border-radius: 3px; font-family: inherit; font-size: 9px; }
   @media (max-width: 900px) { .nav-arrow { width: 38px; height: 38px; font-size: 14px; } .nav-prev { left: 6px; } .nav-next { right: 6px; } }
+  @media (max-width: 640px) {
+    .topbar { padding: 0 8px; gap: 8px; }
+    .topbar-brand { flex: 0 0 auto; gap: 8px; }
+    .topbar-logo { height: 22px; }
+    .topbar-sep, .topbar-title { display: none; }
+    .topbar-ctrls { flex: 1 1 auto; min-width: 0; overflow-x: auto; overflow-y: hidden; justify-content: flex-start; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .topbar-ctrls::-webkit-scrollbar { display: none; }
+    .tb { flex: 0 0 44px; min-width: 44px; }
+    .page-ind { flex: 0 0 68px; min-width: 68px; }
+    .gap { flex: 0 0 4px; width: 4px; }
+  }
 </style>
 </head>
 <body>
@@ -118,28 +132,28 @@
     <img class="topbar-logo" src="bainultra-wordmark.svg" alt="BainUltra">
     <div class="topbar-sep"></div>
     <div class="topbar-title">Liste de prix condensée 2026 · FR</div>
-    <button class="tb tb-toc" id="btnToc" title="Sommaire">&#9776;<span class="tb-label">Sommaire</span></button>
+    <button type="button" class="tb tb-toc" id="btnToc" title="Sommaire">&#9776;<span class="tb-label">Sommaire</span></button>
   </div>
   <div class="topbar-ctrls">
-    <button class="tb" id="btnSearch" title="Rechercher">&#128269;<span class="tb-label">Recherche</span></button>
-    <button class="tb" id="btnThumbs" title="Vignettes">&#9638;<span class="tb-label">Vignettes</span></button>
+    <button type="button" class="tb" id="btnSearch" title="Rechercher">&#128269;<span class="tb-label">Recherche</span></button>
+    <button type="button" class="tb" id="btnThumbs" title="Vignettes">&#9638;<span class="tb-label">Vignettes</span></button>
     <div class="gap"></div>
-    <button class="tb" id="btnZoomOut" title="Réduire">&#8722;<span class="tb-label">Zoom &minus;</span></button>
-    <button class="tb" id="btnZoomIn" title="Agrandir">&#43;<span class="tb-label">Zoom +</span></button>
+    <button type="button" class="tb" id="btnZoomOut" title="Réduire">&#8722;<span class="tb-label">Zoom &minus;</span></button>
+    <button type="button" class="tb" id="btnZoomIn" title="Agrandir">&#43;<span class="tb-label">Zoom +</span></button>
     <div class="gap"></div>
-    <button class="tb off" id="btnPrev" title="Page précédente">&#9664;<span class="tb-label">Préc</span></button>
+    <button type="button" class="tb off" id="btnPrev" title="Page précédente">&#9664;<span class="tb-label">Préc</span></button>
     <div class="page-ind" id="pgInd">1 <span>/ 223</span></div>
-    <button class="tb" id="btnNext" title="Page suivante">&#9654;<span class="tb-label">Suiv</span></button>
+    <button type="button" class="tb" id="btnNext" title="Page suivante">&#9654;<span class="tb-label">Suiv</span></button>
     <div class="gap"></div>
-    <button class="tb" id="btnFS" title="Plein écran">&#x26F6;<span class="tb-label">Plein</span></button>
-    <a class="tb" id="btnDL" title="Télécharger le PDF (FR)" href="./Liste_de_prix_condensee_2026_FR.pdf" download style="text-decoration:none">&#8681;<span class="tb-label">PDF</span></a>
+    <button type="button" class="tb" id="btnFS" title="Plein écran">&#x26F6;<span class="tb-label">Plein</span></button>
+    <a class="tb tb-link" id="btnDL" title="Télécharger le PDF (FR)" href="./Liste_de_prix_condensee_2026_FR.pdf" download>&#8681;<span class="tb-label">PDF</span></a>
     <div class="gap"></div>
-    <a class="tb" href="../" title="Changer de langue" style="text-decoration:none">&#127760;<span class="tb-label">FR / EN</span></a>
+    <a class="tb tb-link" href="../" title="Changer de langue">&#127760;<span class="tb-label">FR / EN</span></a>
   </div>
 </div>
 
-<button class="nav-arrow nav-prev off" id="navL">&#10094;</button>
-<button class="nav-arrow nav-next" id="navR">&#10095;</button>
+<button type="button" class="nav-arrow nav-prev off" id="navL">&#10094;</button>
+<button type="button" class="nav-arrow nav-next" id="navR">&#10095;</button>
 
 <div class="scene" id="scene">
   <div class="book-container" id="bookCtr">
@@ -164,38 +178,38 @@
 <div class="thumb-strip" id="thumbStrip"></div>
 
 <div class="bottombar" id="bottomBar">
-  <button class="bb" onclick="goTo(1)">Couverture</button>
-  <button class="bb" onclick="goTo(2)">Index</button>
-  <button class="bb" onclick="goTo(4)">Infos</button>
-  <button class="bb" onclick="goTo(7)">Accessoires</button>
-  <button class="bb" onclick="goTo(13)">Amma</button>
-  <button class="bb" onclick="goTo(33)">Bain de ville</button>
-  <button class="bb" onclick="goTo(37)">Balnéo</button>
-  <button class="bb" onclick="goTo(49)">BeOne</button>
-  <button class="bb" onclick="goTo(51)">Celestia</button>
-  <button class="bb" onclick="goTo(55)">Charism</button>
-  <button class="bb" onclick="goTo(63)">Citti</button>
-  <button class="bb" onclick="goTo(73)">Elegancia</button>
-  <button class="bb" onclick="goTo(81)">Essencia</button>
-  <button class="bb" onclick="goTo(89)">Esthesia</button>
-  <button class="bb" onclick="goTo(93)">Evanescence</button>
-  <button class="bb" onclick="goTo(101)">Inua</button>
-  <button class="bb" onclick="goTo(107)">Libra</button>
-  <button class="bb" onclick="goTo(117)">Lunessa</button>
-  <button class="bb" onclick="goTo(121)">Méridien</button>
-  <button class="bb" onclick="goTo(141)">Monarch</button>
-  <button class="bb" onclick="goTo(151)">Nokori</button>
-  <button class="bb" onclick="goTo(161)">Opalia</button>
-  <button class="bb" onclick="goTo(171)">Opus</button>
-  <button class="bb" onclick="goTo(173)">Origami</button>
-  <button class="bb" onclick="goTo(191)">Scala</button>
-  <button class="bb" onclick="goTo(195)">Thalassa</button>
-  <button class="bb" onclick="goTo(197)">Thalassa&sup2;</button>
-  <button class="bb" onclick="goTo(203)">Vibe</button>
-  <button class="bb" onclick="goTo(213)">Zenora</button>
-  <button class="bb" onclick="goTo(215)">Compléments</button>
-  <button class="bb" onclick="goTo(216)">Vedana</button>
-  <button class="bb" onclick="goTo(218)">Aka&#x0303;sa</button>
+  <button type="button" class="bb" onclick="goTo(1)">Couverture</button>
+  <button type="button" class="bb" onclick="goTo(2)">Index</button>
+  <button type="button" class="bb" onclick="goTo(4)">Infos</button>
+  <button type="button" class="bb" onclick="goTo(7)">Accessoires</button>
+  <button type="button" class="bb" onclick="goTo(13)">Amma</button>
+  <button type="button" class="bb" onclick="goTo(33)">Bain de ville</button>
+  <button type="button" class="bb" onclick="goTo(37)">Balnéo</button>
+  <button type="button" class="bb" onclick="goTo(49)">BeOne</button>
+  <button type="button" class="bb" onclick="goTo(51)">Celestia</button>
+  <button type="button" class="bb" onclick="goTo(55)">Charism</button>
+  <button type="button" class="bb" onclick="goTo(63)">Citti</button>
+  <button type="button" class="bb" onclick="goTo(73)">Elegancia</button>
+  <button type="button" class="bb" onclick="goTo(81)">Essencia</button>
+  <button type="button" class="bb" onclick="goTo(89)">Esthesia</button>
+  <button type="button" class="bb" onclick="goTo(93)">Evanescence</button>
+  <button type="button" class="bb" onclick="goTo(101)">Inua</button>
+  <button type="button" class="bb" onclick="goTo(107)">Libra</button>
+  <button type="button" class="bb" onclick="goTo(117)">Lunessa</button>
+  <button type="button" class="bb" onclick="goTo(121)">Méridien</button>
+  <button type="button" class="bb" onclick="goTo(141)">Monarch</button>
+  <button type="button" class="bb" onclick="goTo(151)">Nokori</button>
+  <button type="button" class="bb" onclick="goTo(161)">Opalia</button>
+  <button type="button" class="bb" onclick="goTo(171)">Opus</button>
+  <button type="button" class="bb" onclick="goTo(173)">Origami</button>
+  <button type="button" class="bb" onclick="goTo(191)">Scala</button>
+  <button type="button" class="bb" onclick="goTo(195)">Thalassa</button>
+  <button type="button" class="bb" onclick="goTo(197)">Thalassa&sup2;</button>
+  <button type="button" class="bb" onclick="goTo(203)">Vibe</button>
+  <button type="button" class="bb" onclick="goTo(213)">Zenora</button>
+  <button type="button" class="bb" onclick="goTo(215)">Compléments</button>
+  <button type="button" class="bb" onclick="goTo(216)">Vedana</button>
+  <button type="button" class="bb" onclick="goTo(218)">Aka&#x0303;sa</button>
 </div>
 
 <div class="kbd-hint"><kbd>&larr;</kbd> <kbd>&rarr;</kbd> tourner les pages &nbsp;&middot;&nbsp; <kbd>F</kbd> plein écran &nbsp;&middot;&nbsp; <kbd>&#8984;F</kbd> recherche</div>
@@ -419,7 +433,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     document.getElementById('tocPanel').classList.remove('open');
     document.getElementById('searchPanel').classList.remove('open');
-    document.getElementById('thumbStrip').classList.remove('vis');
+    setThumbsVisible(false);
   }
 });
 
@@ -588,7 +602,7 @@ document.getElementById('searchIn').addEventListener('input', e => {
   if (q.length < 1) return;
   const hits = sIdx.filter(i => i.t.toLowerCase().includes(q)).slice(0, 30);
   if (!hits.length) {
-    res.innerHTML = '<div style="padding:14px;color:#aaa;font-size:12px">Aucun résultat</div>';
+    res.innerHTML = '<div class="empty-results">Aucun résultat</div>';
     return;
   }
   hits.forEach(h => {
@@ -599,7 +613,15 @@ document.getElementById('searchIn').addEventListener('input', e => {
   });
 });
 
-document.getElementById('btnThumbs').onclick = () => document.getElementById('thumbStrip').classList.toggle('vis');
+function setThumbsVisible(visible) {
+  document.getElementById('thumbStrip').classList.toggle('vis', visible);
+  document.querySelector('.kbd-hint').classList.toggle('hidden', visible);
+}
+
+document.getElementById('btnThumbs').onclick = () => {
+  const strip = document.getElementById('thumbStrip');
+  setThumbsVisible(!strip.classList.contains('vis'));
+};
 
 function buildThumbs() {
   const strip = document.getElementById('thumbStrip');
@@ -616,7 +638,8 @@ const PAGE_RATIO = 0.7778;
 let zoomLevel = 1.0;
 
 function resizeBook() {
-  const topBar = 62, bottomBar = 44, pad = 32, arrowZone = 120;
+  const topBar = 62, bottomBar = 44, pad = 32;
+  const arrowZone = window.innerWidth < 700 ? 48 : 120;
   const availH = window.innerHeight - topBar - bottomBar - pad;
   const availW = window.innerWidth - arrowZone;
   let pageH = availH;

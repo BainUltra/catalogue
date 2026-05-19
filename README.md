@@ -6,7 +6,9 @@ single link that lands them on a language-picker, then opens the corresponding
 flipbook with search, table of contents, thumbnails, page-flip animations,
 fullscreen, and downloadable PDF.
 
-**Live URL:** https://rfrechette00-source.github.io/2026-condensed-price-list/
+**Live URL:** https://bainultra.github.io/catalogue/
+
+**Repository:** https://github.com/BainUltra/catalogue
 
 ## Structure
 
@@ -26,7 +28,8 @@ fullscreen, and downloadable PDF.
 │   ├── Liste_de_prix_condensee_2026_FR.pdf
 │   └── pages/
 │       └── page-001.jpg … page-223.jpg
-└── .gitignore
+├── .gitignore
+└── .nojekyll                                  Disable GitHub Pages Jekyll processing
 ```
 
 Every URL works in isolation:
@@ -43,12 +46,11 @@ returns to the picker.
 Paste this single URL anywhere — Slack, email, SharePoint, dealer portal:
 
 ```
-https://rfrechette00-source.github.io/2026-condensed-price-list/
+https://bainultra.github.io/catalogue/
 ```
 
 Recipients land on the language picker and click through. The URL bar shows
-`rfrechette00-source.github.io`, not BainUltra-Online-Hub, so it stays
-self-contained.
+`bainultra.github.io/catalogue/`, so it stays self-contained under BainUltra.
 
 ### SharePoint embed
 
@@ -75,7 +77,10 @@ Download button in each flipbook is hardcoded to these paths.
 
 ```bash
 cd en   # or cd fr
-rm -rf pages && mkdir pages
+if [ -d pages ]; then
+  if command -v trash >/dev/null; then trash pages; else mv pages "/tmp/pages-$(date +%s)"; fi
+fi
+mkdir pages
 pdftoppm -jpeg -jpegopt "quality=82,progressive=y,optimize=y" -r 150 \
   BU_Condensed_Price_List_2026.pdf pages/page
 ```
